@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NGOGo</title>
+
+    @*<environment include="Development">
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        </environment>
+        <environment exclude="Development">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+                  crossorigin="anonymous"
+                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+        </environment>*@
+    <link rel="stylesheet" href="~/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <style>
+        .navbar-center {
+            left: 50%;
+            position: absolute;
+        }
+
+        .navbar {
+            padding: 1rem 1rem;
+        }
+
+        .nav-link {
+            padding-top: 46px;
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+        }
+
+        .active {
+            background: #19608C;
+        }
+
+            .active a {
+                color: white !important;
+            }
+    </style>
+</head>
+<body>
+    @*<header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">NGOGO</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+                        <partial name="_LoginPartial" />
+                        <ul class="navbar-nav navbar-center">
+
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+        </header>*@
+    <header>
+        <div class="container">
+            <div class="header d-lg-flex justify-content-between align-items-center py-2 px-sm-2 px-1">
+                <!-- logo -->
+                <div id="logo">
+                    <h1><a href="/"><span class="text-bl">NGO</span>GO</a></h1>
+                </div>
+                <!-- //logo -->
+                <!-- nav -->
+                <div class="nav_w3ls ml-lg-5">
+                    <nav>
+                        <label for="drop" class="toggle">Menu</label>
+                        <input type="checkbox" id="drop">
+                        <ul class="menu">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            @*<li>
+
+            <label for="drop-2" class="toggle toogle-2">
+                Pages <span class="fa fa-angle-down" aria-hidden="true"></span>
+            </label>
+            <a href="#">Pages <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+            <input type="checkbox" id="drop-2">
+            <ul>
+                <li><a href="#about" class="drop-text">About Us</a></li>
+                <li><a href="#services" class="drop-text">Services</a></li>
+                <li><a href="#gallery" class="drop-text">Gallery</a></li>
+            </ul>
+        </li>*@
+                            <li><a href="#blog">Blog</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
+
+
+
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li>
+                                    <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" style="font-size:10px;">@User.Identity.Name!</a>
+                                </li>
+                                @*<li>
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                </form>
+            </li>*@
+                            }
+                            else
+                            {
+                                <li><a href="/Identity/Account/Login">Login</a></li>
+                                <li><a href="register.html">Register</a></li>
+                            }
+
+
+                        </ul>
+                    </nav>
+                </div>
+                <!-- //nav -->
+            </div>
+        </div>
+    </header>
+    <partial name="_CookieConsentPartial" />
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - NGOGO - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+        </script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
