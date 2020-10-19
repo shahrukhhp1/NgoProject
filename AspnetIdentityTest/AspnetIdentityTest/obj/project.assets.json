@@ -12131,11 +12131,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Work\\burhan marketing\\testIdentity\\AspnetIdentityTest\\AspnetIdentityTest\\AspnetIdentityTest.csproj",
+      "projectUniqueName": "D:\\Work\\burhan marketing\\NGOWeb\\AspnetIdentityTest\\AspnetIdentityTest\\AspnetIdentityTest.csproj",
       "projectName": "AspnetIdentityTest",
-      "projectPath": "D:\\Work\\burhan marketing\\testIdentity\\AspnetIdentityTest\\AspnetIdentityTest\\AspnetIdentityTest.csproj",
+      "projectPath": "D:\\Work\\burhan marketing\\NGOWeb\\AspnetIdentityTest\\AspnetIdentityTest\\AspnetIdentityTest.csproj",
       "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "D:\\Work\\burhan marketing\\testIdentity\\AspnetIdentityTest\\AspnetIdentityTest\\obj\\",
+      "outputPath": "D:\\Work\\burhan marketing\\NGOWeb\\AspnetIdentityTest\\AspnetIdentityTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
