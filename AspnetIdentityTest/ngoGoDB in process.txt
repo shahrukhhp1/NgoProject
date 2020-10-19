@@ -1,0 +1,26 @@
+ngo
+id,name,.... fields
+
+Survey
+id,companyId,year,month,title
+
+surveyQuestion
+id,surveyid,text,type
+
+surveyquestionOption
+id,surveyQuestionId,text
+
+surveyAnswer
+surveyquestion,ngoid,text/html,surveyquestionOptionId
+
+corporate
+name
+id
+
+applicationuser
+usertype
+entityId
+
+
+
+
