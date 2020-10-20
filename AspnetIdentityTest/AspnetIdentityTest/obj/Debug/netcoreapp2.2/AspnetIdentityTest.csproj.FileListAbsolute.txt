@@ -62,3 +62,6 @@ D:\Work\burhan marketing\NGOWeb\AspnetIdentityTest\AspnetIdentityTest\obj\Debug\
 D:\Work\burhan marketing\NGOWeb\AspnetIdentityTest\AspnetIdentityTest\obj\Debug\netcoreapp2.2\AspnetIdentityTest.dll
 D:\Work\burhan marketing\NGOWeb\AspnetIdentityTest\AspnetIdentityTest\obj\Debug\netcoreapp2.2\AspnetIdentityTest.pdb
 D:\Work\burhan marketing\NGOWeb\AspnetIdentityTest\AspnetIdentityTest\obj\Debug\netcoreapp2.2\AspnetIdentityTest.csproj.CopyComplete
+D:\Work\burhan marketing\NGOWeb\AspnetIdentityTest\AspnetIdentityTest\obj\Debug\netcoreapp2.2\Razor\Areas\Corporate\Views\Home.g.cshtml.cs
+D:\Work\burhan marketing\NGOWeb\AspnetIdentityTest\AspnetIdentityTest\obj\Debug\netcoreapp2.2\Razor\Areas\Corporate\Views\Home\Index.g.cshtml.cs
+D:\Work\burhan marketing\NGOWeb\AspnetIdentityTest\AspnetIdentityTest\obj\Debug\netcoreapp2.2\Razor\Areas\Corporate\Views\Shared\_Layout.g.cshtml.cs
