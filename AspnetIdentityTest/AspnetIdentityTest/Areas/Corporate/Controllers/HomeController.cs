@@ -13,5 +13,10 @@ namespace AspnetIdentityTest.Areas.Corporate.Controllers
         {
             return View();
         }
+
+        public IActionResult CreateGrantForm()
+        {
+            return View();
+        }
     }
 }

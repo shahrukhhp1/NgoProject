@@ -706,15 +706,15 @@ demo = {
       var cardStatsMiniLineColor = "#fff",
           cardStatsMiniDotColor = "#fff";
 
-      ctx = document.getElementById('activeUsers').getContext("2d");
+      //ctx = document.getElementById('activeUsers').getContext("2d");
 
-      gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
-      gradientStroke.addColorStop(0, '#80b6f4');
-      gradientStroke.addColorStop(1, chartColor);
+      //gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
+      //gradientStroke.addColorStop(0, '#80b6f4');
+      //gradientStroke.addColorStop(1, chartColor);
 
-      gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
-      gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-      gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
+      //gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
+     // gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+      //gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
 
       myChart = new Chart(ctx, {
           type: 'line',
@@ -1211,44 +1211,44 @@ demo = {
         });
     },
 
-    initVectorMap: function(){
-         var mapData = {
-                "AU": 760,
-                "BR": 550,
-                "CA": 120,
-                "DE": 1300,
-                "FR": 540,
-                "GB": 690,
-                "GE": 200,
-                "IN": 200,
-                "RO": 600,
-                "RU": 300,
-                "US": 2920,
-            };
+ //   initVectorMap: function(){
+ //        var mapData = {
+ //               "AU": 760,
+ //               "BR": 550,
+ //               "CA": 120,
+ //               "DE": 1300,
+ //               "FR": 540,
+ //               "GB": 690,
+ //               "GE": 200,
+ //               "IN": 200,
+ //               "RO": 600,
+ //               "RU": 300,
+ //               "US": 2920,
+ //           };
 
-            $('#worldMap').vectorMap({
-                map: 'world_mill_en',
-                backgroundColor: "transparent",
-                zoomOnScroll: false,
-                regionStyle: {
-                    initial: {
-                        fill: '#e4e4e4',
-                        "fill-opacity": 0.9,
-                        stroke: 'none',
-                        "stroke-width": 0,
-                        "stroke-opacity": 0
-                    }
-                },
+ //           $('#worldMap').vectorMap({
+ //               map: 'world_mill_en',
+ //               backgroundColor: "transparent",
+ //               zoomOnScroll: false,
+ //               regionStyle: {
+ //                   initial: {
+ //                       fill: '#e4e4e4',
+ //                       "fill-opacity": 0.9,
+ //                       stroke: 'none',
+ //                       "stroke-width": 0,
+ //                       "stroke-opacity": 0
+ //                   }
+ //               },
 
-                series: {
-                    regions: [{
-                        values: mapData,
-                        scale: ["#AAAAAA","#444444"],
-                        normalizeFunction: 'polynomial'
-                    }]
-                },
-            });
-	},
+ //               series: {
+ //                   regions: [{
+ //                       values: mapData,
+ //                       scale: ["#AAAAAA","#444444"],
+ //                       normalizeFunction: 'polynomial'
+ //                   }]
+ //               },
+ //           });
+	//},
 
 
     initGoogleMaps: function(){

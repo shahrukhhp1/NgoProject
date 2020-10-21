@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="~/Corporate/css/now-ui-dashboard.min.css" rel="stylesheet" />
 
+
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="~/Corporate/css/demo.css" rel="stylesheet" />
     <style type="text/css">
@@ -39,13 +40,14 @@
 
     <link href="~/Corporate/css/StyleSheet1.css" rel="stylesheet" />
 
+    <link href="~/Corporate/css/devSyle.css" rel="stylesheet" />
+
     <script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/42/9/common.js"></script>
     <script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps-api-v3/api/js/42/9/util.js"></script>
 </head>
 
 
 <body class=" sidebar-mini ">
-    <div id="ofBar" style="display:none">🔥<b>Summer Bundles ON </b> 🔥Grab the hottest deals of the season and <b>save up to 90%</b>! 💣<a href="https://www.creative-tim.com/campaign?ref=lp-campaign" target="_blank" id="btn-bar">View Offers</a><a id="close-bar">×</a></div>
 
 
 
@@ -55,8 +57,8 @@
 
         <div class="sidebar" data-color="orange">
             <!--
-                Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
-            -->
+            Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+        -->
 
             <div class="logo">
                 <a href="/" class="simple-text logo-mini">
@@ -116,12 +118,6 @@
                 </div>
 
                 <ul class="nav">
-
-
-
-
-
-
 
 
                     <li class="active">
@@ -291,7 +287,7 @@
                             <i class="now-ui-icons files_single-copy-04"></i>
 
                             <p>
-                                Forms <b class="caret"></b>
+                                Grant Forms <b class="caret"></b>
                             </p>
                         </a>
 
@@ -299,9 +295,9 @@
                             <ul class="nav">
 
                                 <li>
-                                    <a href="../examples/forms/regular.html">
-                                        <span class="sidebar-mini-icon">RF</span>
-                                        <span class="sidebar-normal"> Regular Forms </span>
+                                    <a href="@Url.Action("CreateGrantForm","Home", new { area = "Corporate"})">
+                                        <span class="sidebar-mini-icon">CF</span>
+                                        <span class="sidebar-normal"> Create Form </span>
                                     </a>
                                 </li>
 
@@ -460,8 +456,12 @@
         </div>
 
 
+        
+
+
         <div class="main-panel ps" id="main-panel">
             <!-- Navbar -->
+        
             <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
                 <div class="container-fluid">
                     <div class="navbar-wrapper">
@@ -474,7 +474,7 @@
                             </button>
                         </div>
 
-                        <a class="navbar-brand" href="#pablo">Dashboard</a>
+                        <a class="navbar-brand" href="@Url.Action("Index","Home", new { area = "Corporate"})">Dashboard</a>
                     </div>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -486,6 +486,16 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
 
 
+                        <form>
+                            <div class="input-group no-border">
+                                <input type="text" value="" class="form-control" placeholder="Search...">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
 
                         <ul class="navbar-nav">
                             <li class="nav-item">
@@ -527,6 +537,12 @@
                     </div>
                 </div>
             </nav>
+            
+            
+            <div class="panel-header panel-header-sm">
+
+
+            </div>
             <div class="content">
                 @RenderBody()
             </div>
@@ -534,31 +550,12 @@
             <footer class="footer">
 
                 <div class=" container-fluid ">
-                    <nav>
-                        <ul>
-                            <li>
-                                <a href="https://www.creative-tim.com">
-                                    Creative Tim
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://presentation.creative-tim.com">
-                                    About Us
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://blog.creative-tim.com">
-                                    Blog
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+
                     <div class="copyright" id="copyright">
                         ©
-                        <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>2020, Designed by <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
+                        <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>, Coded by <a href="#" target="_blank">Shahrukh</a>.
                     </div>
                 </div>
-
 
 
             </footer>
@@ -566,7 +563,7 @@
 
 
         </div>
-        @RenderSection("Scripts", required: false)
+
 
 
 
@@ -585,7 +582,7 @@
         <link href="~/Corporate/css/StyleSheet.css" rel="stylesheet" />
         <script type="text/javascript" id="">
             function setCookie(b, d, c) { var a = new Date; a.setTime(a.getTime() + 864E5 * c); c = "expires\x3d" + a.toUTCString(); document.cookie = b + "\x3d" + d + ";" + c + ";path\x3d/" } function readCookie(b) { b += "\x3d"; for (var d = document.cookie.split(";"), c = 0; c < d.length; c++) { for (var a = d[c]; " " == a.charAt(0);)a = a.substring(1, a.length); if (0 == a.indexOf(b)) return a.substring(b.length, a.length) } return null }
-            function createOfferBar() { var b = document.createElement("div"); b.setAttribute("id", "ofBar"); b.innerHTML = "\ud83d\udd25\x3cb\x3eSummer Bundles ON \x3c/b\x3e \ud83d\udd25Grab the hottest deals of the season and \x3cb\x3esave up to 90%\x3c/B\x3e! \ud83d\udca3\x3ca href\x3d'https://www.creative-tim.com/campaign?ref\x3dlp-campaign' target\x3d'_blank' id\x3d'btn-bar'\x3eView Offers\x3c/a\x3e\x3c/span\x3e\x3ca id\x3d'close-bar'\x3e\u00d7\x3c/a\x3e"; document.body.insertBefore(b, document.body.firstChild) }
+            function createOfferBar() { var b = document.createElement("div"); b.setAttribute("id", "ofBar"); b.innerHTML = "\ud83d\udd25\x3cb\x3eSummer Bundles ON \x3c/b\x3e \ud83d\udd25Grab the hottest deals of the season and \x3cb\x3esave up to 90%\x3c/B\x3e! \ud83d\udca3\x3ca href\x3d'https://www.link.com/' target\x3d'_blank' id\x3d'btn-bar'\x3eView Offers\x3c/a\x3e\x3c/span\x3e\x3ca id\x3d'close-bar'\x3e\u00d7\x3c/a\x3e"; document.body.insertBefore(b, document.body.firstChild) }
             function closeOfferBar() { document.getElementById("ofBar").setAttribute("style", "display:none"); setCookie("view_offer_bar", "true", 1) } var value = readCookie("view_offer_bar"); null == value && (createOfferBar(), document.getElementById("close-bar").addEventListener("click", closeOfferBar));</script>
 
 
@@ -660,80 +657,6 @@
 
         <script>
             $(document).ready(function () {
-
-
-                $('#facebook').sharrre({
-                    share: {
-                        facebook: true
-                    },
-                    enableHover: false,
-                    enableTracking: false,
-                    enableCounter: false,
-                    click: function (api, options) {
-                        api.simulateClick();
-                        api.openPopup('facebook');
-                    },
-                    template: '<i class="fab fa-facebook-f"></i> Facebook',
-                    url: 'https://demos.creative-tim.com/now-ui-dashboard-pro/examples/dashboard.html'
-                });
-
-                $('#google').sharrre({
-                    share: {
-                        googlePlus: true
-                    },
-                    enableCounter: false,
-                    enableHover: false,
-                    enableTracking: true,
-                    click: function (api, options) {
-                        api.simulateClick();
-                        api.openPopup('googlePlus');
-                    },
-                    template: '<i class="fab fa-google-plus"></i> Google',
-                    url: 'https://demos.creative-tim.com/now-ui-dashboard-pro/examples/dashboard.html'
-                });
-
-                $('#twitter').sharrre({
-                    share: {
-                        twitter: true
-                    },
-                    enableHover: false,
-                    enableTracking: false,
-                    enableCounter: false,
-                    buttons: { twitter: { via: 'CreativeTim' } },
-                    click: function (api, options) {
-                        api.simulateClick();
-                        api.openPopup('twitter');
-                    },
-                    template: '<i class="fab fa-twitter"></i> Twitter',
-                    url: 'https://demos.creative-tim.com/now-ui-dashboard-pro/examples/dashboard.html'
-                });
-
-
-
-                // Facebook Pixel Code Don't Delete
-                !function (f, b, e, v, n, t, s) {
-                    if (f.fbq) return; n = f.fbq = function () {
-                        n.callMethod ?
-                            n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-                    }; if (!f._fbq) f._fbq = n;
-                    n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0;
-                    t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s)
-                }(window,
-                    document, 'script', '//connect.facebook.net/en_US/fbevents.js');
-
-                try {
-                    fbq('init', '111649226022273');
-                    fbq('track', "PageView");
-
-                } catch (err) {
-                    console.log('Facebook Track Error:', err);
-                }
-
-            });
-        </script>
-        
-        <script>
-            $(document).ready(function () {
                 $().ready(function () {
                     $sidebar = $('.sidebar');
                     $sidebar_img_container = $sidebar.find('.sidebar-background');
@@ -746,13 +669,6 @@
                     window_width = $(window).width();
 
                     fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
-
-                    // if( window_width > 767 && fixed_plugin_open == 'Dashboard' ){
-                    //     if($('.fixed-plugin .dropdown').hasClass('show-dropdown')){
-                    //         $('.fixed-plugin .dropdown').addClass('show');
-                    //     }
-                    //
-                    // }
 
                     $('.fixed-plugin a').click(function (event) {
                         // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
@@ -887,6 +803,7 @@
 
 
 
+        @RenderSection("Scripts", required: false)
 
 
 
@@ -894,18 +811,5 @@
 
 
 
-
-
-
-        <script>
-            $(document).ready(function () {
-                // Javascript method's body can be found in assets/js/demos.js
-                demo.initDashboardPageCharts();
-
-                demo.initVectorMap();
-
-            });
-        </script>
-        <div class="jvectormap-tip"></div><iframe name="_hjRemoteVarsFrame" title="_hjRemoteVarsFrame" id="_hjRemoteVarsFrame" src="https://vars.hotjar.com/box-469cf41adb11dc78be68c1ae7f9457a4.html" style="display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;"></iframe>
 </body>
 </html>
