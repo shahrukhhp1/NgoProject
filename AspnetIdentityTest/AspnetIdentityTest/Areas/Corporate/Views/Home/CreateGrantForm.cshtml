@@ -9,179 +9,205 @@
     <div class="col-md-12">
 
 
+        <form method="get" action="/" class="form-horizontal">
+            <div id="questionArea">
+                <div class="card ">
+                    <div class="card-header ">
+                        <h4 class="card-title">Create Grant Form </h4>
+                    </div>
+                    <div class="card-body ">
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="card ">
-
-            <div class="card-header ">
-                <h4 class="card-title">Form Elements</h4>
-            </div>
-
-            <div class="card-body ">
-
-
-
-
-
-
-
-                <form method="get" action="/" class="form-horizontal">
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label">With help</label>
-
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <input type="text" class="form-control">
-                                <span class="form-text">A block of help text that breaks onto a new line.</span>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="formName">
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label">Password</label>
 
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <input type="password" class="form-control">
-                            </div>
-                        </div>
+                <div class="card questionTemp">
+
+                    <div class="card-header ">
+                        <h4 class="card-title">Question </h4>
                     </div>
 
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label">Placeholder</label>
+                    <div class="card-body ">
 
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="placeholder">
+
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Type of Question</label>
+                            <div class="col-sm-10 checkbox-radios">
+
+                                <div class="form-check form-check-radio col-xs-3">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="QTYPE" value="MCQ" checked="">
+                                        <span class="form-check-sign"></span>
+                                        MCQ
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-radio col-xs-3">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="QTYPE" value="SINGLE">
+                                        <span class="form-check-sign"></span>
+                                        Single Choice
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-radio col-xs-3">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="QTYPE" value="OPEN" >
+                                        <span class="form-check-sign"></span>
+                                        Open End Question
+                                    </label>
+                                </div>
+
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label">Disabled</label>
 
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <input type="text" class="form-control" value="Disabled input here.." disabled="">
+                        <div class="row inQuestionArea">
+                            <label class="col-sm-2 col-form-label">Question</label>
+
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Your question text">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-10 option">
+                                <label class="col-sm-2 col-form-label">Option </label>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Possible answer">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 ">
+                                    <button class="btn btn-outline-primary right-side" onclick="addOption(this);">
+                                        Add Option
+                                    </button>
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
-
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label">Static control</label>
-
-                        <div class="col-sm-10">
-                            <div class="form-group">
-                                <p class="form-control-static">hello@creative-tim.com</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label">Checkboxes and radios</label>
-                        <div class="col-sm-10 checkbox-radios">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox">
-                                    <span class="form-check-sign"></span>
-                                    First Checkbox
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox">
-                                    <span class="form-check-sign"></span>
-                                    Second Checkbox
-                                </label>
-                            </div>
-
-                            <div class="form-check form-check-radio">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked="">
-                                    <span class="form-check-sign"></span>
-                                    First Radio
-                                </label>
-                            </div>
-
-                            <div class="form-check form-check-radio">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                    <span class="form-check-sign"></span>
-                                    Second Radio
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label">Inline checkboxes</label>
-                        <div class="col-sm-10">
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox">
-                                    <span class="form-check-sign"></span>
-                                    a
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox">
-                                    <span class="form-check-sign"></span>
-                                    b
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox">
-                                    <span class="form-check-sign"></span>
-                                    c
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-
+                </div>
 
             </div>
+            <script>
+                function addOption(elem) {
+                    var toCopy = `<div class="col-sm-10 option">
+                                            <label class="col-sm-2 col-form-label">Option </label>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Possible answer">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 ">
+                                                <button class="btn btn-outline-primary right-side" onclick="addOption(this);">
+                                                    Add Option
+                                                </button>
+                                            </div>
+                                        </div>`;
+                    var inElem = $(elem).parent().parent().parent();
+                    $(inElem).append(toCopy);
+                    $(elem).remove();
+                };
+
+                function AddQuestion() {
+                    event.preventDefault();
+                    var toCopy = `<div class="card questionTemp">
+
+                    <div class="card-header ">
+                        <h4 class="card-title">Question </h4>
+                    </div>
+
+                    <div class="card-body ">
 
 
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Type of Question</label>
+                            <div class="col-sm-10 checkbox-radios">
 
-        </div>
+                                <div class="form-check form-check-radio col-xs-3">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="QTYPE" value="MCQ" checked="">
+                                        <span class="form-check-sign"></span>
+                                        MCQ
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-radio col-xs-3">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="QTYPE" value="SINGLE">
+                                        <span class="form-check-sign"></span>
+                                        Single Choice
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-radio col-xs-3">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="QTYPE" value="OPEN" >
+                                        <span class="form-check-sign"></span>
+                                        Open End Question
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
 
 
+                        <div class="row inQuestionArea">
+                            <label class="col-sm-2 col-form-label">Question</label>
+
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Your question text">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-10 option">
+                                <label class="col-sm-2 col-form-label">Option </label>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Possible answer">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 ">
+                                    <button class="btn btn-outline-primary right-side" onclick="addOption(this);">
+                                        Add Option
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
 
+                    </div>
+                </div>`;
+                    $("#questionArea").append(toCopy);
+                };
+            </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <button class="btn btn-outline-primary right-side" onclick="AddQuestion();">
+                Add Question
+            </button>
+        </form>
     </div>
 
 
 </div>
+
+@section Scripts{
+    <script>
+
+        $(document).on('change','input[type = radio]', function (elem) {
+            if (elem.target.value == "MCQ" || elem.target.value == "SINGLE") {
+                $(elem.target).parent().parent().parent().parent().parent().find(".option").show();
+            } else {
+                $(elem.target).parent().parent().parent().parent().parent().find(".option").hide();
+            }
+        });
+    </script>
+}
