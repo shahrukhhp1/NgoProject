@@ -9,7 +9,7 @@
     <div class="col-md-12">
 
 
-        <form method="get" action="/" class="form-horizontal">
+        <form method="post" action="CreateUpdateGrantForm" class="form-horizontal">
             <div id="questionArea">
                 <div class="card ">
                     <div class="card-header ">
@@ -22,7 +22,7 @@
                             <label class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-10">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="formName">
+                                    <input type="text" class="form-control" name="data.title">
                                 </div>
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                 <div class="card questionTemp">
 
                     <div class="card-header ">
-                        <h4 class="card-title">Question </h4>
+                        <h4 class="card-title">Question 1</h4>
                     </div>
 
                     <div class="card-body ">
@@ -45,21 +45,21 @@
 
                                 <div class="form-check form-check-radio col-xs-3">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="QTYPE" value="MCQ" checked="">
+                                        <input class="form-check-input" type="radio" name="data.questions[0].type" value="MCQ" checked="">
                                         <span class="form-check-sign"></span>
                                         MCQ
                                     </label>
                                 </div>
                                 <div class="form-check form-check-radio col-xs-3">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="QTYPE" value="SINGLE">
+                                        <input class="form-check-input" type="radio" name="data.questions[0].type" value="SINGLE">
                                         <span class="form-check-sign"></span>
                                         Single Choice
                                     </label>
                                 </div>
                                 <div class="form-check form-check-radio col-xs-3">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="QTYPE" value="OPEN" >
+                                        <input class="form-check-input" type="radio" name="data.questions[0].type" value="OPEN" >
                                         <span class="form-check-sign"></span>
                                         Open End Question
                                     </label>
@@ -69,12 +69,12 @@
                         </div>
 
 
-                        <div class="row inQuestionArea">
+                        <div class="row inQuestionArea" id="qIndex0">
                             <label class="col-sm-2 col-form-label">Question</label>
 
                             <div class="col-sm-10">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Your question text">
+                                    <input type="text" name="data.questions[0].text" class="form-control" placeholder="Your question text">
                                 </div>
                             </div>
 
@@ -82,7 +82,7 @@
                                 <label class="col-sm-2 col-form-label">Option </label>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Possible answer">
+                                        <input type="text" name="data.questions[0].options[0]" class="form-control" placeholder="Possible answer">
                                     </div>
                                 </div>
                                 <div class="col-sm-4 ">
@@ -100,11 +100,12 @@
             </div>
             <script>
                 function addOption(elem) {
+                    event.preventDefault();
                     var toCopy = `<div class="col-sm-10 option">
                                             <label class="col-sm-2 col-form-label">Option </label>
                                             <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Possible answer">
+                                                    <input type="text" name="{nameOfOption}"  class="form-control" placeholder="Possible answer">
                                                 </div>
                                             </div>
                                             <div class="col-sm-4 ">
@@ -114,6 +115,15 @@
                                             </div>
                                         </div>`;
                     var inElem = $(elem).parent().parent().parent();
+                    var qName = inElem.attr('id');
+                    var questionId = qName.replace("qIndex", "");
+
+                    var oCount = $(inElem).find(".option").length;
+
+                    var nameOfOption = "{nameOfOption}";
+                    var nameOfOptionReplace = "data.questions[{questionId}].options[{optionNum}]".replace("{optionNum}", oCount)
+                        .replace("{questionId}", questionId);
+                    toCopy = toCopy.replace(nameOfOption, nameOfOptionReplace);
                     $(inElem).append(toCopy);
                     $(elem).remove();
                 };
@@ -123,7 +133,7 @@
                     var toCopy = `<div class="card questionTemp">
 
                     <div class="card-header ">
-                        <h4 class="card-title">Question </h4>
+                        <h4 class="card-title">Question {qNumShow}</h4>
                     </div>
 
                     <div class="card-body ">
@@ -135,21 +145,21 @@
 
                                 <div class="form-check form-check-radio col-xs-3">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="QTYPE" value="MCQ" checked="">
+                                        <input class="form-check-input" type="radio" name="data.questions[{qNum}].type" value="MCQ" checked="">
                                         <span class="form-check-sign"></span>
                                         MCQ
                                     </label>
                                 </div>
                                 <div class="form-check form-check-radio col-xs-3">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="QTYPE" value="SINGLE">
+                                        <input class="form-check-input" type="radio" name="data.questions[{qNum}].type" value="SINGLE">
                                         <span class="form-check-sign"></span>
                                         Single Choice
                                     </label>
                                 </div>
                                 <div class="form-check form-check-radio col-xs-3">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="QTYPE" value="OPEN" >
+                                        <input class="form-check-input" type="radio" name="data.questions[{qNum}].type" value="OPEN" >
                                         <span class="form-check-sign"></span>
                                         Open End Question
                                     </label>
@@ -159,12 +169,12 @@
                         </div>
 
 
-                        <div class="row inQuestionArea">
+                        <div class="row inQuestionArea" id="qIndex{qNum}">
                             <label class="col-sm-2 col-form-label">Question</label>
 
                             <div class="col-sm-10">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Your question text">
+                                    <input type="text" name="data.questions[{qNum}].text" class="form-control" placeholder="Your question text">
                                 </div>
                             </div>
 
@@ -172,7 +182,7 @@
                                 <label class="col-sm-2 col-form-label">Option </label>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Possible answer">
+                                        <input type="text" name="data.questions[{qNum}].options[0]" class="form-control" placeholder="Possible answer">
                                     </div>
                                 </div>
                                 <div class="col-sm-4 ">
@@ -186,6 +196,10 @@
 
                     </div>
                 </div>`;
+                    //{qNum}
+                    var count = $(".questionTemp").length;
+                    toCopy = toCopy.replaceAll("{qNumShow}", (count + 1));
+                    toCopy = toCopy.replaceAll("{qNum}", count);
                     $("#questionArea").append(toCopy);
                 };
             </script>
@@ -193,6 +207,8 @@
             <button class="btn btn-outline-primary right-side" onclick="AddQuestion();">
                 Add Question
             </button>
+
+            <button class="btn" type="submit">Submit</button>
         </form>
     </div>
 
