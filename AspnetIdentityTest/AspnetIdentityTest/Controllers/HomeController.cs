@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AspnetIdentityTest.Models;
+using AspnetIdentityTest.Extensions;
 
 namespace AspnetIdentityTest.Controllers
 {
@@ -12,7 +13,10 @@ namespace AspnetIdentityTest.Controllers
     {
         public IActionResult Index()
         {
-            
+            if (User.IsCorporate())
+            {
+                return RedirectToAction("Index", "Home", new { area = "corporate" });
+            }
             return View();
         }
 

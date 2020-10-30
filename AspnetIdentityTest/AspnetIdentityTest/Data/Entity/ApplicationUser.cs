@@ -13,10 +13,10 @@ namespace AspnetIdentityTest.Data.Entity
         public UserType UserType { get; set; }
 
 
-        public long? CorporateUserId { get; set; }
-        public virtual Corporate CorporateUser { get; set;}
+        public long? CorporateId { get; set; }
+        public virtual Corporate Corporate { get; set;}
 
-        public long? NGOUserId { get; set; }
-        public virtual NGO NGOUser { get; set; }
+        public long? NGOId { get; set; }
+        public virtual NGO NGO { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using AspnetIdentityTest.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AspnetIdentityTest.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201030133424_user_corporate")]
+    partial class user_corporate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,17 +223,17 @@ namespace AspnetIdentityTest.Data.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<long?>("CorporateId");
+                    b.Property<long?>("CorporateUserId");
 
                     b.Property<int>("IntId");
 
-                    b.Property<long?>("NGOId");
+                    b.Property<long?>("NGOUserId");
 
                     b.Property<int>("UserType");
 
-                    b.HasIndex("CorporateId");
+                    b.HasIndex("CorporateUserId");
 
-                    b.HasIndex("NGOId");
+                    b.HasIndex("NGOUserId");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
@@ -285,11 +287,11 @@ namespace AspnetIdentityTest.Data.Migrations
                 {
                     b.HasOne("AspnetIdentityTest.Data.Entity.Corporate", "CorporateUser")
                         .WithMany("Users")
-                        .HasForeignKey("CorporateId");
+                        .HasForeignKey("CorporateUserId");
 
                     b.HasOne("AspnetIdentityTest.Data.Entity.NGO", "NGOUser")
                         .WithMany("Users")
-                        .HasForeignKey("NGOId");
+                        .HasForeignKey("NGOUserId");
                 });
 #pragma warning restore 612, 618
         }
