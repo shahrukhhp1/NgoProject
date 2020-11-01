@@ -12,6 +12,7 @@ namespace AspnetIdentityTest.Areas.Corporate.Models
             this.Questions = new List<GrantQuestionVM>();
         }
 
+        public long SurveyId { get; set; }
         public string Title { get; set; }
         public List<GrantQuestionVM> Questions { get; set; }
     }

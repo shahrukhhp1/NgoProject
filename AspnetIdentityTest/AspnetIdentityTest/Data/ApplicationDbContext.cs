@@ -18,6 +18,11 @@ namespace AspnetIdentityTest.Data
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Corporate> Corporates { get; set; }
         public DbSet<NGO> NGOs { get; set; }
-        
+
+        public DbSet<Survey> Surveys { get; set; }
+        public DbSet<SurveyQuestion> SurveyQuestions { get; set; }
+        public DbSet<SurveyQuestionOption> SurveyQuestionOptions { get; set; }
+        public DbSet<SurveyAnswer> SurveyAnswers { get; set; }
+
     }
 }

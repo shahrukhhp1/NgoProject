@@ -1,4 +1,4 @@
-﻿
+﻿@model AspnetIdentityTest.Areas.Corporate.Models.GrantFormVM
 @{
     Layout = "~/Areas/Corporate/Views/Shared/_Layout.cshtml";
 }
@@ -13,7 +13,14 @@
             <div id="questionArea">
                 <div class="card ">
                     <div class="card-header ">
-                        <h4 class="card-title">Create Grant Form </h4>
+                        @if (Model.SurveyId == 0)
+                        {
+                            <h4 class="card-title">Create Grant Form </h4>
+                        }
+                        else
+                        {
+                            <h4 class="card-title">Edit Grant Form </h4>
+                        }
                     </div>
                     <div class="card-body ">
 
@@ -22,193 +29,176 @@
                             <label class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-10">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="data.title">
+                                    <input type="text" class="form-control" name="data.title" value="@Model.Title">
                                 </div>
                             </div>
+                            <input type="hidden" name="data.SurveyId" value="@Model.SurveyId" />
                         </div>
                     </div>
                 </div>
 
+                @if (Model.Questions != null && Model.Questions.Count > 0)
+                            {
+                                var count = 0;
+                                foreach (var quest in Model.Questions)
+                                {
+                                        <div class="card questionTemp">
 
-                <div class="card questionTemp">
+                                            <div class="card-header ">
+                                                <h4 class="card-title">Question @(count + 1)</h4>
+                                            </div>
 
-                    <div class="card-header ">
-                        <h4 class="card-title">Question 1</h4>
-                    </div>
-
-                    <div class="card-body ">
-
-
-                        <div class="row">
-                            <label class="col-sm-2 col-form-label">Type of Question</label>
-                            <div class="col-sm-10 checkbox-radios">
-
-                                <div class="form-check form-check-radio col-xs-3">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="data.questions[0].type" value="MCQ" checked="">
-                                        <span class="form-check-sign"></span>
-                                        MCQ
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-radio col-xs-3">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="data.questions[0].type" value="SINGLE">
-                                        <span class="form-check-sign"></span>
-                                        Single Choice
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-radio col-xs-3">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="data.questions[0].type" value="OPEN" >
-                                        <span class="form-check-sign"></span>
-                                        Open End Question
-                                    </label>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                        <div class="row inQuestionArea" id="qIndex0">
-                            <label class="col-sm-2 col-form-label">Question</label>
-
-                            <div class="col-sm-10">
-                                <div class="form-group">
-                                    <input type="text" name="data.questions[0].text" class="form-control" placeholder="Your question text">
-                                </div>
-                            </div>
-
-                            <div class="col-sm-10 option">
-                                <label class="col-sm-2 col-form-label">Option </label>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <input type="text" name="data.questions[0].options[0]" class="form-control" placeholder="Possible answer">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 ">
-                                    <button class="btn btn-outline-primary right-side" onclick="addOption(this);">
-                                        Add Option
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                                            <div class="card-body ">
+                                                <div class="row">
+                                                    <label class="col-sm-2 col-form-label">Type of Question</label>
+                                                    <div class="col-sm-10 checkbox-radios">
+                                                        @{
+                                                            var mcqCheck = quest.Type == "MCQ" ? "checked=''" : "";
+                                                            var singCheck = quest.Type == "SINGLE" ? "checked=''" : "";
+                                                            var openCheck = quest.Type == "OPEN" ? "checked=''" : "";
+                                                            var nameBase = "data.questions[" + count  + "]";
+                                                        }
+                                                        <div class="form-check form-check-radio col-xs-3">
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="radio" name="@(nameBase).type" value="MCQ" @mcqCheck>
+                                                                <span class="form-check-sign"></span>
+                                                                MCQ
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-radio col-xs-3">
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="radio" name="@(nameBase).type" value="SINGLE" @singCheck>
+                                                                <span class="form-check-sign"></span>
+                                                                Single Choice
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-radio col-xs-3">
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="radio" name="@(nameBase).type" value="OPEN" @openCheck>
+                                                                <span class="form-check-sign"></span>
+                                                                Open End Question
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
 
-                    </div>
-                </div>
+                                                <div class="row inQuestionArea" id="qIndex@(count)">
+                                                    <label class="col-sm-2 col-form-label">Question</label>
 
-            </div>
-            <script>
-                function addOption(elem) {
-                    event.preventDefault();
-                    var toCopy = `<div class="col-sm-10 option">
-                                            <label class="col-sm-2 col-form-label">Option </label>
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <input type="text" name="{nameOfOption}"  class="form-control" placeholder="Possible answer">
+                                                    <div class="col-sm-10">
+                                                        <div class="form-group">
+                                                            <input type="text" name="@(nameBase).text" class="form-control" placeholder="Your question text" value="@quest.Text">
+                                                            <input type="hidden" name="@(nameBase).id" class="form-control" placeholder="Your question text" value="@quest.Id">
+                                                        </div>
+                                                    </div>
+                                                    @{ 
+                                                        var oCount = 0;
+                                                    }
+                                                    @foreach (var opt in quest.Options)
+                                                    {
+
+                                                        <div class="col-sm-10 option">
+                                                            <label class="col-sm-2 col-form-label">Option </label>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <input type="text" name="@(nameBase).options[@(oCount)]" class="form-control" placeholder="Possible answer" value="@opt">
+                                                                </div>
+                                                            </div>
+                                                            @*<div class="col-sm-4 ">
+                    <button class="btn btn-outline-primary right-side" onclick="addOption(this);">
+                        Add Option
+                    </button>
+                </div>*@
+                                                        </div>
+                                                        oCount++;
+                                                    }
+
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 ">
-                                                <button class="btn btn-outline-primary right-side" onclick="addOption(this);">
-                                                    Add Option
-                                                </button>
-                                            </div>
-                                        </div>`;
-                    var inElem = $(elem).parent().parent().parent();
-                    var qName = inElem.attr('id');
-                    var questionId = qName.replace("qIndex", "");
+                                        </div>
+                        count++;
+                    }
+                }
+                else
+                {
 
-                    var oCount = $(inElem).find(".option").length;
+                    <div class="card questionTemp">
 
-                    var nameOfOption = "{nameOfOption}";
-                    var nameOfOptionReplace = "data.questions[{questionId}].options[{optionNum}]".replace("{optionNum}", oCount)
-                        .replace("{questionId}", questionId);
-                    toCopy = toCopy.replace(nameOfOption, nameOfOptionReplace);
-                    $(inElem).append(toCopy);
-                    $(elem).remove();
-                };
-
-                function AddQuestion() {
-                    event.preventDefault();
-                    var toCopy = `<div class="card questionTemp">
-
-                    <div class="card-header ">
-                        <h4 class="card-title">Question {qNumShow}</h4>
-                    </div>
-
-                    <div class="card-body ">
-
-
-                        <div class="row">
-                            <label class="col-sm-2 col-form-label">Type of Question</label>
-                            <div class="col-sm-10 checkbox-radios">
-
-                                <div class="form-check form-check-radio col-xs-3">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="data.questions[{qNum}].type" value="MCQ" checked="">
-                                        <span class="form-check-sign"></span>
-                                        MCQ
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-radio col-xs-3">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="data.questions[{qNum}].type" value="SINGLE">
-                                        <span class="form-check-sign"></span>
-                                        Single Choice
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-radio col-xs-3">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="data.questions[{qNum}].type" value="OPEN" >
-                                        <span class="form-check-sign"></span>
-                                        Open End Question
-                                    </label>
-                                </div>
-
-                            </div>
+                        <div class="card-header ">
+                            <h4 class="card-title">Question 1</h4>
                         </div>
 
+                        <div class="card-body ">
 
-                        <div class="row inQuestionArea" id="qIndex{qNum}">
-                            <label class="col-sm-2 col-form-label">Question</label>
 
-                            <div class="col-sm-10">
-                                <div class="form-group">
-                                    <input type="text" name="data.questions[{qNum}].text" class="form-control" placeholder="Your question text">
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Type of Question</label>
+                                <div class="col-sm-10 checkbox-radios">
+
+                                    <div class="form-check form-check-radio col-xs-3">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="data.questions[0].type" value="MCQ" checked="">
+                                            <span class="form-check-sign"></span>
+                                            MCQ
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-radio col-xs-3">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="data.questions[0].type" value="SINGLE">
+                                            <span class="form-check-sign"></span>
+                                            Single Choice
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-radio col-xs-3">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="data.questions[0].type" value="OPEN">
+                                            <span class="form-check-sign"></span>
+                                            Open End Question
+                                        </label>
+                                    </div>
+
                                 </div>
                             </div>
 
-                            <div class="col-sm-10 option">
-                                <label class="col-sm-2 col-form-label">Option </label>
-                                <div class="col-sm-4">
+
+                            <div class="row inQuestionArea" id="qIndex0">
+                                <label class="col-sm-2 col-form-label">Question</label>
+
+                                <div class="col-sm-10">
                                     <div class="form-group">
-                                        <input type="text" name="data.questions[{qNum}].options[0]" class="form-control" placeholder="Possible answer">
+                                        <input type="text" name="data.questions[0].text" class="form-control" placeholder="Your question text">
                                     </div>
                                 </div>
-                                <div class="col-sm-4 ">
-                                    <button class="btn btn-outline-primary right-side" onclick="addOption(this);">
-                                        Add Option
-                                    </button>
+
+                                <div class="col-sm-10 option">
+                                    <label class="col-sm-2 col-form-label">Option </label>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <input type="text" name="data.questions[0].options[0]" class="form-control" placeholder="Possible answer">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 ">
+                                        <button class="btn btn-outline-primary right-side" onclick="addOption(this);">
+                                            Add Option
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
+
+
                         </div>
-
-
                     </div>
-                </div>`;
-                    //{qNum}
-                    var count = $(".questionTemp").length;
-                    toCopy = toCopy.replaceAll("{qNumShow}", (count + 1));
-                    toCopy = toCopy.replaceAll("{qNum}", count);
-                    $("#questionArea").append(toCopy);
-                };
-            </script>
+                }
+
+
+            </div>
 
             <button class="btn btn-outline-primary right-side" onclick="AddQuestion();">
                 Add Question
             </button>
 
-            <button class="btn" type="submit">Submit</button>
+            <button class="btn" type="submit">Save</button>
         </form>
     </div>
 
@@ -218,12 +208,123 @@
 @section Scripts{
     <script>
 
-        $(document).on('change','input[type = radio]', function (elem) {
+        $(document).on('change', 'input[type = radio]', function (elem) {
             if (elem.target.value == "MCQ" || elem.target.value == "SINGLE") {
                 $(elem.target).parent().parent().parent().parent().parent().find(".option").show();
             } else {
                 $(elem.target).parent().parent().parent().parent().parent().find(".option").hide();
             }
         });
+
+
+
     </script>
+
+
+    <script>
+        function addOption(elem) {
+            event.preventDefault();
+            var toCopy = `<div class="col-sm-10 option">
+                                                                        <label class="col-sm-2 col-form-label">Option </label>
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                <input type="text" name="{nameOfOption}"  class="form-control" placeholder="Possible answer">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-4 ">
+                                                                            <button class="btn btn-outline-primary right-side" onclick="addOption(this);">
+                                                                                Add Option
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>`;
+            var inElem = $(elem).parent().parent().parent();
+            var qName = inElem.attr('id');
+            var questionId = qName.replace("qIndex", "");
+
+            var oCount = $(inElem).find(".option").length;
+
+            var nameOfOption = "{nameOfOption}";
+            var nameOfOptionReplace = "data.questions[{questionId}].options[{optionNum}]".replace("{optionNum}", oCount)
+                .replace("{questionId}", questionId);
+            toCopy = toCopy.replace(nameOfOption, nameOfOptionReplace);
+            $(inElem).append(toCopy);
+            $(elem).remove();
+        };
+
+        function AddQuestion() {
+            event.preventDefault();
+            var toCopy = `<div class="card questionTemp">
+
+                                                <div class="card-header ">
+                                                    <h4 class="card-title">Question {qNumShow}</h4>
+                                                </div>
+
+                                                <div class="card-body ">
+
+
+                                                    <div class="row">
+                                                        <label class="col-sm-2 col-form-label">Type of Question</label>
+                                                        <div class="col-sm-10 checkbox-radios">
+
+                                                            <div class="form-check form-check-radio col-xs-3">
+                                                                <label class="form-check-label">
+                                                                    <input class="form-check-input" type="radio" name="data.questions[{qNum}].type" value="MCQ" checked="">
+                                                                    <span class="form-check-sign"></span>
+                                                                    MCQ
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check form-check-radio col-xs-3">
+                                                                <label class="form-check-label">
+                                                                    <input class="form-check-input" type="radio" name="data.questions[{qNum}].type" value="SINGLE">
+                                                                    <span class="form-check-sign"></span>
+                                                                    Single Choice
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check form-check-radio col-xs-3">
+                                                                <label class="form-check-label">
+                                                                    <input class="form-check-input" type="radio" name="data.questions[{qNum}].type" value="OPEN" >
+                                                                    <span class="form-check-sign"></span>
+                                                                    Open End Question
+                                                                </label>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row inQuestionArea" id="qIndex{qNum}">
+                                                        <label class="col-sm-2 col-form-label">Question</label>
+
+                                                        <div class="col-sm-10">
+                                                            <div class="form-group">
+                                                                <input type="text" name="data.questions[{qNum}].text" class="form-control" placeholder="Your question text">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-10 option">
+                                                            <label class="col-sm-2 col-form-label">Option </label>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <input type="text" name="data.questions[{qNum}].options[0]" class="form-control" placeholder="Possible answer">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4 ">
+                                                                <button class="btn btn-outline-primary right-side" onclick="addOption(this);">
+                                                                    Add Option
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>`;
+            //{qNum}
+            var count = $(".questionTemp").length;
+            toCopy = toCopy.replaceAll("{qNumShow}", (count + 1));
+            toCopy = toCopy.replaceAll("{qNum}", count);
+            $("#questionArea").append(toCopy);
+        };
+    </script>
+
 }
