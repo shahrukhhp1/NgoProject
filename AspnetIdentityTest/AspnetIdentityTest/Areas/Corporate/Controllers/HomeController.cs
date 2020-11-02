@@ -28,7 +28,47 @@ namespace AspnetIdentityTest.Areas.Corporate.Controllers
             return View();
         }
 
+        public async Task<IActionResult> ListGrantForm()
+        {
+            List<GrantFormVM> ret = new List<GrantFormVM>();
+
+            var userId = User.GetIdentity();
+            if (!string.IsNullOrEmpty(userId))
+            {
+                var user = await _context.ApplicationUser.Where(x => x.Id.Equals(userId)).FirstOrDefaultAsync();
+                if (user != null && user.CorporateId.HasValue)
+                {
+                    ret = await _context.Surveys.Where(x => x.CorporateId.Equals(user.CorporateId.Value))
+                        .Select(x=> new GrantFormVM {
+                            CreatedBy = x.CreatedBy,
+                            CreatedOn =x.CreatedOn,
+                            IsLocked = x.IsLocked,
+                            Month  = x.Month,
+                            SurveyId = x.Id,
+                            Title = x.Title,
+                            Year = x.Year
+                        }).ToListAsync();
+                }
+            }
+            return View(ret);
+        }
+
+
         public async Task<IActionResult> CreateGrantForm(int sid)
+        {
+            GrantFormVM ret = new GrantFormVM();
+            ret = await GetGrantForm(sid);
+            return View(ret);
+        }
+
+        public async Task<IActionResult> ViewGrantForm(int sid)
+        {
+            GrantFormVM ret = new GrantFormVM();
+            ret = await GetGrantForm(sid);
+            return View(ret);
+        }
+
+        private async Task<GrantFormVM> GetGrantForm(int sid)
         {
             GrantFormVM ret = new GrantFormVM();
             if (sid > 0)
@@ -40,13 +80,14 @@ namespace AspnetIdentityTest.Areas.Corporate.Controllers
                     var company = await _context.Corporates.Where(x => x.Id.Equals(user.CorporateId.Value)).FirstOrDefaultAsync();
                     if (company != null)
                     {
-                        var survey = await _context.Surveys.Include(x=>x.SurveyQuestions)
+                        var survey = await _context.Surveys.Include(x => x.SurveyQuestions)
                             .Where(x => x.Id.Equals(sid) && x.CorporateId.Equals(company.Id))
                             .FirstOrDefaultAsync();
                         if (survey != null)
                         {
                             ret.Title = survey.Title;
                             ret.SurveyId = survey.Id;
+                            ret.IsLocked = survey.IsLocked;
                             foreach (var quest in survey.SurveyQuestions)
                             {
                                 var options = await _context.SurveyQuestionOptions.Where(x => x.SurveyQuestionId.Equals(quest.Id))
@@ -63,7 +104,7 @@ namespace AspnetIdentityTest.Areas.Corporate.Controllers
                     }
                 }
             }
-            return View(ret);
+            return ret;
         }
 
         [HttpPost]
@@ -86,13 +127,15 @@ namespace AspnetIdentityTest.Areas.Corporate.Controllers
                             foreach (var quest in data.Questions)
                             {
                                 var survQuestOpts = new List<SurveyQuestionOption>();
-
-                                foreach (var opt in quest.Options)
+                                if (quest.Type.ToLower() != "open")
                                 {
-                                    survQuestOpts.Add(new SurveyQuestionOption()
+                                    foreach (var opt in quest.Options)
                                     {
-                                        Text = opt
-                                    });
+                                        survQuestOpts.Add(new SurveyQuestionOption()
+                                        {
+                                            Text = opt
+                                        });
+                                    }
                                 }
 
                                 survQuestions.Add(new SurveyQuestion()
@@ -116,15 +159,75 @@ namespace AspnetIdentityTest.Areas.Corporate.Controllers
 
                             await _context.AddAsync(newSurv);
                             await _context.SaveChangesAsync();
+                            return RedirectToAction("ViewGrantForm", "Home", new { area = "Corporate", sid = newSurv.Id });
                         }
                         else {
-                            var surveyQuesions = await _context.SurveyQuestions.Where(x => x.Id.Equals(data.SurveyId)).FirstOrDefaultAsync();
+                            var surveyQuesions = await _context.SurveyQuestions.Where(x => x.SurveyId.Equals(data.SurveyId)).ToListAsync();
                             //remove all and then add
+                            foreach (var quest in surveyQuesions)
+                            {
+                                var questOptions = await _context.SurveyQuestionOptions.Where(x => x.SurveyQuestionId.Equals(quest.Id)).ToListAsync();
+                                _context.SurveyQuestionOptions.RemoveRange(questOptions);
+                            }
+                            _context.SurveyQuestions.RemoveRange(surveyQuesions);
+                            await _context.SaveChangesAsync();
+
+                            foreach (var quest in data.Questions)
+                            {
+                                var survQuestOpts = new List<SurveyQuestionOption>();
+
+                                if (quest.Type.ToLower() != "open")
+                                {
+                                    foreach (var opt in quest.Options)
+                                    {
+                                        survQuestOpts.Add(new SurveyQuestionOption()
+                                        {
+                                            Text = opt
+                                        });
+                                    }
+                                }
+                                await _context.SurveyQuestions.AddAsync(new SurveyQuestion()
+                                {
+                                    Type = quest.Type,
+                                    Text = quest.Text,
+                                    SurveyQuestionOptions = survQuestOpts,
+                                    SurveyId = data.SurveyId,
+                                });
+                            }
+                            await _context.SaveChangesAsync();
+                            return RedirectToAction("ViewGrantForm", "Home", new { area = "Corporate", sid = data.SurveyId });
                         }
                     }
                 }
             }
+            return View();
+        }
 
+
+        [HttpPost]
+        public async Task<IActionResult> FinalizeGrantForm(GrantFormVM data)
+        {
+            var a = data;
+            var userId = User.GetIdentity();
+            if (!string.IsNullOrEmpty(userId))
+            {
+                var user = await _context.ApplicationUser.Where(x => x.Id.Equals(userId)).FirstOrDefaultAsync();
+                //.Where(x => x.Id.Equals(userId)).FirstOrDefault();
+                if (user != null && user.CorporateId.HasValue)
+                {
+                    var company = await _context.Corporates.Where(x => x.Id.Equals(user.CorporateId.Value)).FirstOrDefaultAsync();
+                    if (company != null)
+                    {
+                        var survey = await _context.Surveys.Where(x => x.Id.Equals(data.SurveyId)).FirstOrDefaultAsync();
+                        if(survey != null)
+                        {
+                            survey.IsLocked = true;
+                            _context.Surveys.Update(survey);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+                }
+            }
             return View();
         }
     }

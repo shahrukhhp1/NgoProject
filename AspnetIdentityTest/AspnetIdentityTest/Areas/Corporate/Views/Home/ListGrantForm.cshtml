@@ -1,0 +1,120 @@
+﻿@model List<AspnetIdentityTest.Areas.Corporate.Models.GrantFormVM>
+@{
+    Layout = "~/Areas/Corporate/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title"> All of Grant Forms</h4>
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+
+                            <tr>
+                                <th>
+
+                                    Title
+
+                                </th>
+
+                                <th>
+
+                                    Month
+
+                                </th>
+
+                                <th>
+
+                                    Year
+
+                                </th>
+
+                                <th class="text-right">
+
+                                    Action
+
+                                </th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+
+                                        @item.Title
+
+                                    </td>
+                                    <td>
+
+                                        @item.Month
+
+                                    </td>
+                                    <td>
+
+                                        @item.Year
+
+                                    </td>
+                                    <td class="text-right">
+
+                                        @if (item.IsLocked)
+                                        {
+                                            <a class="btn btn-outline-primary" href="@Url.Action("ViewGrantForm", "Home", new { area = "Corporate", sid = item.SurveyId })">
+                                                View
+                                            </a>
+                                        }
+                                        else
+                                        {
+
+                                            <a class="btn btn-outline-primary" href="@Url.Action("ViewGrantForm", "Home", new { area = "Corporate", sid = item.SurveyId })">
+                                                View
+                                            </a>
+
+                                            <a class="btn btn-outline-primary" href="@Url.Action("CreateGrantForm", "Home", new { area = "Corporate", sid = item.SurveyId })">
+                                                Edit
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+
+
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{
+
+}
