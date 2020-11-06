@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 
 namespace AspnetIdentityTest.Data.Entity
 {
-    public class Corporate: BaseEntity
+    public class Province : BaseEntity
     {
-        public Corporate()
+        public Province()
         {
-            this.Users = new HashSet<ApplicationUser>();
+            this.Cities = new HashSet<City>();
         }
-        public string Name { get; set; }
-        
 
-        public ICollection<ApplicationUser> Users { get; set; }
+        public string Name { get; set; }
+
+        public ICollection<City> Cities { get; set; }
     }
 }
