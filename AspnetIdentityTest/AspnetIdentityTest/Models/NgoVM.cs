@@ -11,10 +11,12 @@ namespace AspnetIdentityTest.Models
 
         public string FounderName { get; set; }
 
-        public int YearFound { get; set; }
+        public DateTime YearFound { get; set; }
         public string Mission { get; set; }
 
         public string Phone { get; set; }
+        public string Fax { get; set; }
+        public string Mobile { get; set; }
 
         public string OfficeAddress { get; set; }
         public string Website { get; set; }
@@ -22,6 +24,7 @@ namespace AspnetIdentityTest.Models
         public string Linkedin { get; set; }
         public string Twitter { get; set; }
         public string Email { get; set; }
+        public string Budget { get; set; }
         public string FinancialTransparency { get; set; } //attachment
         public string FBRCertificate { get; set; } //attachment
         public string PCFPCertificate { get; set; } //attachment

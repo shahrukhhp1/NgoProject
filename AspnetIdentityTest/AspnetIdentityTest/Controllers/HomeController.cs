@@ -25,7 +25,8 @@ namespace AspnetIdentityTest.Controllers
             return View();
         }
 
-        public IActionResult SubmitNGO()
+        [HttpPost]
+        public IActionResult SubmitNGO(NgoVM data)
         {
             return View();
         }

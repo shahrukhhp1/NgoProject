@@ -23,12 +23,17 @@ namespace AspnetIdentityTest.Data.Entity
         [Column(TypeName = "varchar(250)")]
         public string FounderName { get; set; }
         
-        public int YearFound { get; set; }
+        public DateTime? YearFound { get; set; }
         public string Mission { get; set; }
 
         [Column(TypeName = "varchar(50)")]
         public string Phone { get; set; }
         //public NGOTheme Theme { get; set; }
+
+        [Column(TypeName = "varchar(50)")]
+        public string Fax { get; set; }
+        [Column(TypeName = "varchar(50)")]
+        public string Mobile { get; set; }
 
         public string OfficeAddress { get; set; }
         public string Website { get; set; }
@@ -44,8 +49,11 @@ namespace AspnetIdentityTest.Data.Entity
 
         public string ContactPersonName { get; set; }
         public string ContactPersonTitle { get; set; }
+        [Column(TypeName = "varchar(50)")]
         public string ContactPersonTelephoneNumber { get; set; }
+        [Column(TypeName = "varchar(50)")]
         public string ContactPersonCellNumber { get; set; }
+        [Column(TypeName = "varchar(50)")]
         public string ContactPersonEmail { get; set; }
 
 
