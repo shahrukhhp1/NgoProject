@@ -20,6 +20,16 @@ namespace AspnetIdentityTest.Controllers
             return View();
         }
 
+        public IActionResult RegisterNGO()
+        {
+            return View();
+        }
+
+        public IActionResult SubmitNGO()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
