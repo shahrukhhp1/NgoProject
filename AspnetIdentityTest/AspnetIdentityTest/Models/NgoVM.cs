@@ -36,6 +36,8 @@ namespace AspnetIdentityTest.Models
         public string ContactPersonTelephoneNumber { get; set; }
         public string ContactPersonCellNumber { get; set; }
         public string ContactPersonEmail { get; set; }
+        public string User { get; set; }
+        public string Password { get; set; }
 
     }
 }
